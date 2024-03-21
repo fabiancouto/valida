@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con QuaggaJS</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(253, 226, 218);
+        }
+        .form-container {
+            border: 2px solid rgb(242, 61, 8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            background-color: white;
+        }
+        .modal-dialog {
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 form-container">
+            <h2 class="mb-4">Valida v1.0</h2>
+            <form id="myForm" method="POST">
+                <div class="form-group">
+                    <label for="instructor">Instructor:</label>
+                    <select class="form-control" id="instructor" name="entry.945813456" required>
+                        <option value="">Seleccionar</option>
+                        <option value="1">Instructor 1</option>
+                        <option value="2">Instructor 2</option>
+                        <option value="3">Instructor 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="codigo">Código:</label>
+                    <input type="text" class="form-control" id="codigo" name="entry.1171362171" required readonly>
+                    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#scannerModal">
+                        <img src="barcode-icon.png" alt="Barcode Icon" style="width: 20px; height: 20px;">
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scanner Modal -->
+<div class="modal fade" id="scannerModal" tabindex="-1" role="dialog" aria-labelledby="scannerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scannerModalLabel">Lector de códigos de barras</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="interactive" class="viewport"></div>
+                <div class="error"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialize QuaggaJS
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#scannerModal .modal-body')
+            },
+            decoder: {
+                readers: ['ean_reader']
+            }
+        }, function (err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log("QuaggaJS initialized");
+            Quagga.start();
+        });
+
+        // On barcode detected, fill the code input and close the modal
+        Quagga.onDetected(function (data) {
+            $('#codigo').val(data.codeResult.code);
+            $('#scannerModal').modal('hide');
+            Quagga.stop();
+        });
+
+        // Stop Quagga when modal is closed
+        $('#scannerModal').on('hidden.bs.modal', function () {
+            Quagga.stop();
+        });
+
+        // Form submit handler
+        $('#myForm').submit(function (event) {
+            event.preventDefault();
+            // Perform form submission here
+            console.log("Form submitted");
+        });
+    });
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe de forma convencional
+    const formData = new FormData(this);
+    fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
+        method: 'POST',
+        mode: 'no-cors', // Para evitar errores de CORS
+        body: formData
+    })
+    .then(response => {
+        // Maneja la respuesta según necesites
+        console.log('Respuesta recibida:', response);
+    })
+    .catch(error => console.error('Error al enviar los datos:', error));
+});
+
+</script>
+</body>
+</html>
