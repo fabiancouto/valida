@@ -26,7 +26,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 form-container">
-            <h2 class="mb-4">Valida v1.3</h2>
+            <h2 class="mb-4">Valida v1.4</h2>
             <form id="myForm">
                 <div class="form-group">
                     <label for="instructor">Instructor:</label>
@@ -79,8 +79,10 @@
 <script>
     $(document).ready(function () {
 
-        $('#myForm')[0].reset();
-
+        //$('#myForm')[0].reset();
+        $('#codigo').val('');
+        $('#codigoExterno').val('');
+        
         // Initialize QuaggaJS
         Quagga.init({
             inputStream: {
@@ -107,7 +109,9 @@
             $('#codigoExterno').val(code.substring(6, 12));
             $('#scannerModal').modal('hide');
             Quagga.stop();
-            checkFormValidity();
+            if(esCodigoUnico($('#codigoExterno').val())){
+                checkFormValidity();
+            }
         });
 
         // Stop Quagga when modal is closed
@@ -119,7 +123,6 @@
         document.getElementById("myForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Evita que el formulario se envíe de forma convencional
             const formData = new FormData(this);
-            if(esCodigoUnico(formData[1].value)) {
             fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
                 method: 'POST',
                 mode: 'no-cors', // Para evitar errores de CORS
@@ -132,7 +135,6 @@
                 window.location.reload();
             })
             .catch(error => alert('Error al enviar los datos:\n' + error));
-            }
         });
 
         function esCodigoUnico(codigo) {
