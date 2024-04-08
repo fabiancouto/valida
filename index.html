@@ -119,6 +119,7 @@
         document.getElementById("myForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Evita que el formulario se envíe de forma convencional
             const formData = new FormData(this);
+            if(esCodigoUnico(formData[1].value)) {
             fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
                 method: 'POST',
                 mode: 'no-cors', // Para evitar errores de CORS
@@ -131,7 +132,27 @@
                 window.location.reload();
             })
             .catch(error => alert('Error al enviar los datos:\n' + error));
+            }
         });
+
+        function esCodigoUnico(codigo) {
+              // Llamar a la URL del script de Google Apps Script con el código como parámetro de consulta
+              var url = "https://script.google.com/macros/s/AKfycbwywP_fSxVHgYuuwx1WAZ4OBqOfyBOnOwe7QkCt4RPtzTkRYr-J25ht8lCJTXsYLAN2/exec?codigo=" + encodeURIComponent(codigo);
+            
+              // Realizar una solicitud GET para verificar el código
+              fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                if (data.existe) {
+                  alert("El código ya existe. Por favor, ingrese uno nuevo.");
+                    return false;
+                } else {
+                  // Si el código no existe, enviar el formulario
+                  return true;
+                }
+              })
+              .catch(error => console.error('Error:', error));
+            }
 
         // Check form validity
         function checkFormValidity() {
