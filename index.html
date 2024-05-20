@@ -25,6 +25,10 @@
             width: 90%;
             margin: 0 auto;
         }
+        .error-message {
+            color: red;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -32,7 +36,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 form-container">
-            <h2 class="mb-4">Valida v1.16</h2>
+            <h2 class="mb-4">Valida v1.11</h2>
+            <p id="error-message" class="error-message"></p>
             <form id="myForm">
                 <div class="form-group">
                     <label for="instructor">Instructor:</label>
@@ -51,6 +56,7 @@
                         <option value="MARIA JOSE LOBEIRAS DIAZ">MARIA JOSE LOBEIRAS DIAZ</option>
                         <option value="MARIA NIEVES CAMPINS MATEU">MARIA NIEVES CAMPINS MATEU</option>
                         <option value="MARIO PUENTE MENDEZ">MARIO PUENTE MENDEZ</option>
+                        <option value="MARGARITA RODRIGUEZ PONS">MARGARITA RODRIGUEZ PONS</option>
                         <option value="PILAR MARIA SALAS MAS">PILAR MARIA SALAS MAS</option>
                         <option value="RAFA REUS LINARES">RAFA REUS LINARES</option>
                         <option value="RAFAEL CARBONELL SAMPOL">RAFAEL CARBONELL SAMPOL</option>
@@ -61,9 +67,12 @@
                 </div>
                 <div class="form-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" class="form-control" id="codigo" name="entry.1171362171" required readonly>
+                    <input type="text" class="form-control" id="codigo" onblur="createExternalCode()" name="entry.1171362171" required readonly>
                     <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#scannerModal">
                         Escanear
+                    </button>
+                    <button type="button" class="btn btn-primary mt-2" onclick="enableEditing()">
+                        Manual
                     </button>
                 </div>
                 <div class="form-group">
@@ -99,6 +108,29 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 <script>
+    function enableEditing() {
+            var codeField = document.getElementById('codigo');
+            codeField.readOnly = false;
+            codeField.focus();
+        }
+
+        function createExternalCode() {
+            
+            if($('#codigo').val().startsWith('5000')) {
+                $('#codigoExterno').val($('#codigo').val().substring(6, 12));
+            }
+        }
+
+        function validateCode(msgValue) {
+            var errorMessage = document.getElementById('error-message');
+            if(msgValue != null && msgValue != "") {
+                errorMessage.style.display = 'block';
+                errorMessage.innerText = msgValue;
+            } else {
+                errorMessage.style.display = 'none';
+            }
+            
+        }
     $(document).ready(function () {
 
         //$('#myForm')[0].reset();
@@ -167,6 +199,15 @@
                 $('#submitButton').prop('disabled', false);
             } else {
                 $('#submitButton').prop('disabled', true);
+            }
+            if(!instructorValue){
+                validateCode("Debe seleccionar un instructor");
+            } else if(!codigoValue || !codigoExternoValue) {
+                validateCode("Debe escanear un código o introducirlo manualmente");
+            } else if(!codigoValue.startsWith('5000')) {
+                validateCode("El codigo introducido no es correcto, vuelva a intentarlo");
+            } else {
+                validateCode("");
             }
         }
 
