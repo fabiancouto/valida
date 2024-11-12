@@ -106,7 +106,7 @@ async function enviarTicket(ticketCode, formdata) {
 
     const response = await fetch(url, {
         method: "POST",
-        mode: "no-cors",
+        mode: "cors",
         headers: {
         "Content-Type": "application/x-www-form-urlencoded"
         },
@@ -119,7 +119,7 @@ async function enviarTicket(ticketCode, formdata) {
       const formData = new FormData(formdata);
       fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
           method: 'POST',
-          mode: 'no-cors', // Para evitar errores de CORS
+          mode: 'cors', // Para evitar errores de CORS
           body: formData
       })
       .then(response => {
