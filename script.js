@@ -103,7 +103,7 @@ $(document).ready(function () {
 //-----------------------------------------------------------//
 
 async function enviarTicket(ticketCode) {
-    const url = "https://script.google.com/macros/s/AKfycbwVfilgLVH_2ZSsmiI8N_dx6CbjS_SF3HnHYAbqqdJXl3EMUdmHSMCRSPQHgdzbQo6nSw/exec"; // Reemplaza con la URL del script
+    const url = "https://script.google.com/macros/s/AKfycbzYP0LtUU8_-X224x4XUa6XFMI_J_zZm29zmGXM1jf4W6Cn2DZamTnEPpWSP1RbSuEhvw/exec"; // Reemplaza con la URL del script
 
     const response = await fetch(url, {
         method: "POST",
