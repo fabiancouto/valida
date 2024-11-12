@@ -68,9 +68,8 @@ $(document).ready(function () {
       event.preventDefault(); // Evita que el formulario se envíe de forma convencional
       
       showLoading(true);
-
-      const formData = new FormData(this);
-      enviarTicket($('#codigoExterno').val());
+      
+      enviarTicket($('#codigoExterno').val(); this);
       
   });
 
@@ -102,7 +101,7 @@ $(document).ready(function () {
 
 //-----------------------------------------------------------//
 
-async function enviarTicket(ticketCode) {
+async function enviarTicket(ticketCode; formdata) {
     const url = "https://script.google.com/macros/s/AKfycbzYP0LtUU8_-X224x4XUa6XFMI_J_zZm29zmGXM1jf4W6Cn2DZamTnEPpWSP1RbSuEhvw/exec"; // Reemplaza con la URL del script
 
     const response = await fetch(url, {
@@ -117,6 +116,7 @@ async function enviarTicket(ticketCode) {
     const message = await response.text();
 
     if(message == 'OK'){
+      const formData = new FormData(formdata);
       fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
           method: 'POST',
           mode: 'no-cors', // Para evitar errores de CORS
