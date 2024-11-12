@@ -105,7 +105,7 @@ async function enviarTicket(ticketCode, formdata) {
     const url = "https://script.google.com/macros/s/AKfycbzYP0LtUU8_-X224x4XUa6XFMI_J_zZm29zmGXM1jf4W6Cn2DZamTnEPpWSP1RbSuEhvw/exec"; // Reemplaza con la URL del script
 
     const response = await fetch(url, {
-        method: "POST",
+        method: "GET",
         mode: "cors",
         headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -119,7 +119,7 @@ async function enviarTicket(ticketCode, formdata) {
       const formData = new FormData(formdata);
       fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
           method: 'POST',
-          mode: 'cors', // Para evitar errores de CORS
+          mode: 'no-cors', // Para evitar errores de CORS
           body: formData
       })
       .then(response => {
