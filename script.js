@@ -105,8 +105,8 @@ async function enviarTicket(ticketCode, formdata) {
     const url = "https://script.google.com/macros/s/AKfycbzYP0LtUU8_-X224x4XUa6XFMI_J_zZm29zmGXM1jf4W6Cn2DZamTnEPpWSP1RbSuEhvw/exec"; // Reemplaza con la URL del script
 
     const response = await fetch(url, {
-        method: "GET",
-        mode: "cors",
+        method: "POST",
+        mode: "no-cors",
         headers: {
         "Content-Type": "application/x-www-form-urlencoded"
         },
