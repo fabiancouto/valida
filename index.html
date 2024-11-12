@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,31 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autoescuela Vivero</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: rgb(253, 226, 218);
-        }
-        .form-container {
-            border: 2px solid rgb(242, 61, 8);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 50px;
-            background-color: white;
-        }
-        .modal-dialog {
-            max-width: 80%;
-        }
-
-        video {
-            display: block;
-            width: 90%;
-            margin: 0 auto;
-        }
-        .error-message {
-            color: red;
-            display: none;
-        }
-    </style>
+  
+    
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
 </head>
 <body>
 
@@ -103,117 +83,16 @@
     </div>
 </div>
 
+
+<!-- Pantalla de Carga -->
+<div id="loadingOverlay">
+    <!-- El spinner se añadirá dinámicamente -->
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
-<script>
-    function enableEditing() {
-            var codeField = document.getElementById('codigo');
-            codeField.readOnly = false;
-            codeField.focus();
-        }
-
-        function createExternalCode() {
-            
-            if($('#codigo').val().startsWith('5000')) {
-                $('#codigoExterno').val($('#codigo').val().substring(6, 12));
-            }
-        }
-
-        function validateCode(msgValue) {
-            var errorMessage = document.getElementById('error-message');
-            if(msgValue != null && msgValue != "") {
-                errorMessage.style.display = 'block';
-                errorMessage.innerText = msgValue;
-            } else {
-                errorMessage.style.display = 'none';
-            }
-            
-        }
-    $(document).ready(function () {
-
-        //$('#myForm')[0].reset();
-        $('#codigo').val('');
-        $('#codigoExterno').val('');
-        
-        // Initialize QuaggaJS
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: document.querySelector('#scannerModal .modal-body')
-            },
-            decoder: {
-                readers: ['ean_reader']
-            }
-        }, function (err) {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            console.log("QuaggaJS initialized");
-            Quagga.start();
-        });
-
-        // On barcode detected, fill the code input and close the modal
-        Quagga.onDetected(function (data) {
-            var code = data.codeResult.code;
-            $('#codigo').val(code);
-            $('#codigoExterno').val(code.substring(6, 12));
-            $('#scannerModal').modal('hide');
-            Quagga.stop();
-            checkFormValidity();
-        });
-
-        // Stop Quagga when modal is closed
-        $('#scannerModal').on('hidden.bs.modal', function () {
-            Quagga.stop();
-        });
-
-        // Form submit handler
-        document.getElementById("myForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe de forma convencional
-            const formData = new FormData(this);
-            fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
-                method: 'POST',
-                mode: 'no-cors', // Para evitar errores de CORS
-                body: formData
-            })
-            .then(response => {
-                // Maneja la respuesta según necesites
-                console.log('Respuesta recibida:', response);
-                alert("Datos enviados correctamente");
-                window.location.reload();
-            })
-            .catch(error => alert('Error al enviar los datos:\n' + error));
-        });
-
-        // Check form validity
-        function checkFormValidity() {
-            var instructorValue = $('#instructor').val();
-            var codigoValue = $('#codigo').val();
-            var codigoExternoValue = $('#codigoExterno').val();
-            
-            if (codigoValue.startsWith('5000') && instructorValue && codigoValue && codigoExternoValue) {
-                $('#submitButton').prop('disabled', false);
-            } else {
-                $('#submitButton').prop('disabled', true);
-            }
-            if(!instructorValue){
-                validateCode("Debe seleccionar un instructor");
-            } else if(!codigoValue || !codigoExternoValue) {
-                validateCode("Debe escanear un código o introducirlo manualmente");
-            } else if(!codigoValue.startsWith('5000')) {
-                validateCode("El codigo introducido no es correcto, vuelva a intentarlo");
-            } else {
-                validateCode("");
-            }
-        }
-
-        // Listen for changes in form fields
-        $('#instructor, #codigo, #codigoExterno').on('input', checkFormValidity);
-    });
-</script>
+<script src="script.js"></script>
 </body>
 </html>
