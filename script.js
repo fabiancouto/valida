@@ -118,7 +118,7 @@ async function enviarTicket(ticketCode) {
     if(message == 'OK'){
       fetch('https://docs.google.com/forms/d/1soBaAihwYg2IJf7icGPvTKzgAlDHK9wAgP05pxrWgYY/formResponse', {
           method: 'POST',
-          mode: 'no-cors', // Para evitar errores de CORS
+          mode: 'cors', // Para evitar errores de CORS
           body: formData
       })
       .then(response => {
