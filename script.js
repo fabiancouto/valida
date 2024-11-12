@@ -69,7 +69,7 @@ $(document).ready(function () {
       
       showLoading(true);
       
-      enviarTicket($('#codigoExterno').val(); this);
+      enviarTicket($('#codigoExterno').val(), this);
       
   });
 
