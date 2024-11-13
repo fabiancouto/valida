@@ -69,8 +69,12 @@ $(document).ready(function () {
       
       showLoading(true);
       
-      enviarTicket($('#codigoExterno').val(), this);
-      
+      //enviarTicket($('#codigoExterno').val(), this);
+
+      document.getElementById('myForm').action='https://script.google.com/macros/s/AKfycbzYP0LtUU8_-X224x4XUa6XFMI_J_zZm29zmGXM1jf4W6Cn2DZamTnEPpWSP1RbSuEhvw/exec';
+      document.getElementById('myForm').target='_self';
+      document.getElementById('myForm').method='GET';
+      document.getElementById('myForm').submit();
   });
 
   // Check form validity
