@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Prácticas</title>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2"></script>
+</head>
+<body>
+  <h2>Registrar Práctica</h2>
+  <form id="formPractica">
+    <label>Nombre del Alumno:</label><br>
+    <input type="text" id="nombre"><br><br>
+    <label>Fecha de la Práctica:</label><br>
+    <input type="date" id="fecha"><br><br>
+    <label>Firma:</label><br>
+    <canvas id="firmaCanvas" width="400" height="150" style="border:1px solid #000;"></canvas><br><br>
+    <button type="button" onclick="guardarPractica()">Guardar Práctica</button>
+  </form>
+
+  <script>
+    const canvas = document.getElementById('firmaCanvas');
+    const signaturePad = new SignaturePad(canvas);
+
+    function guardarPractica() {
+      const nombre = document.getElementById('nombre').value;
+      const fecha = document.getElementById('fecha').value;
+      const firma = signaturePad.toDataURL(); // Captura la firma en base64
+
+      fetch('/practicas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, fecha, firma })
+      }).then(response => response.json())
+        .then(data => alert("Práctica registrada con ID: " + data.id))
+        .catch(error => console.error("Error:", error));
+    }
+  </script>
+</body>
+</html>

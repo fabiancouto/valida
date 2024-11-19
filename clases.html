@@ -1,0 +1,42 @@
+<!-- clases.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clases</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS (opcional) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Registrar Clase</h2>
+        <form id="form-clases">
+            <div class="mb-3">
+                <label for="profesor-dni" class="form-label">DNI del Profesor:</label>
+                <input type="text" class="form-control" id="profesor-dni" required>
+            </div>
+            <div class="mb-3">
+                <label for="alumno-dni" class="form-label">DNI del Alumno:</label>
+                <input type="text" class="form-control" id="alumno-dni" required>
+            </div>
+            <div class="mb-3">
+                <label for="observacion" class="form-label">Observación (máx. 200 caracteres):</label>
+                <textarea class="form-control" id="observacion" maxlength="200" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Firma:</label>
+                <canvas id="signature-pad" class="signature-pad border"></canvas>
+                <button type="button" id="clear-signature" class="btn btn-secondary mt-2">Limpiar Firma</button>
+            </div>
+            <button type="submit" class="btn btn-warning">Registrar Clase</button>
+            <a href="index.html" class="btn btn-link">Volver</a>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="js/clases.js"></script>
+    <!-- Bootstrap JS (opcional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

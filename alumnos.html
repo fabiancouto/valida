@@ -1,0 +1,62 @@
+<!-- alumnos.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alumnos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS (opcional) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Registrar Alumno</h2>
+        <form id="form-alumnos">
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI:</label>
+                <input type="text" class="form-control" id="dni" required>
+            </div>
+            <div class="mb-3">
+                <label for="permiso" class="form-label">Permiso:</label>
+                <input type="text" class="form-control" id="permiso" required>
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellido1" class="form-label">Apellido 1:</label>
+                <input type="text" class="form-control" id="apellido1" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellido2" class="form-label">Apellido 2:</label>
+                <input type="text" class="form-control" id="apellido2" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" required>
+            </div>
+            <div class="mb-3">
+                <label for="codigo_postal" class="form-label">Código Postal:</label>
+                <input type="text" class="form-control" id="codigo_postal" required>
+            </div>
+            <div class="mb-3">
+                <label for="poblacion" class="form-label">Población:</label>
+                <input type="text" class="form-control" id="poblacion" required>
+            </div>
+            <button type="submit" class="btn btn-success">Registrar Alumno</button>
+            <a href="index.html" class="btn btn-link">Volver</a>
+        </form>
+
+        <hr>
+
+        <h2 class="mt-4">Consultar Alumnos</h2>
+        <button id="consulta" class="btn btn-info mb-3">Cargar Alumnos</button>
+        <ul id="lista-alumnos" class="list-group"></ul>
+    </div>
+    <script src="js/alumnos.js"></script>
+    <!-- Bootstrap JS (opcional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
