@@ -1,6 +1,7 @@
 <!-- profesores.html -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Profesores</title>
@@ -8,7 +9,9 @@
     <!-- Bootstrap CSS (opcional) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
 </head>
+
 <body>
     <div class="container mt-5">
         <h2>Registrar Profesor</h2>
@@ -27,7 +30,7 @@
                 <button type="button" id="clear-signature" class="btn btn-secondary mt-2">Limpiar Firma</button>
             </div>
             <button type="submit" class="btn btn-primary">Registrar Profesor</button>
-            <a href="index.html" class="btn btn-link">Volver</a>
+            <a href="index.html" class="btn btn-danger">Volver</a>
         </form>
 
         <hr>
@@ -36,9 +39,14 @@
         <button id="consulta" class="btn btn-info mb-3">Cargar Profesores</button>
         <ul id="lista-profesores" class="list-group"></ul>
     </div>
+    <!-- Pantalla de Carga -->
+    <div id="loadingOverlay">
+        <!-- El spinner se añadirá dinámicamente -->
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
     <script src="js/profesores.js"></script>
     <!-- Bootstrap JS (opcional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
