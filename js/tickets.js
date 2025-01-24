@@ -83,7 +83,7 @@ $(document).ready(function () {
       var codigoValue = $('#codigo').val();
       var codigoExternoValue = $('#codigoExterno').val();
       
-      if (codigoValue.startsWith('5000') && instructorValue && codigoValue && codigoExternoValue) {
+      if (codigoValue.startsWith('5000') && codigoExternoValue >= 230620 && instructorValue && codigoValue && codigoExternoValue) {
           $('#submitButton').prop('disabled', false);
       } else {
           $('#submitButton').prop('disabled', true);
