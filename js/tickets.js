@@ -6,7 +6,7 @@ function enableEditing() {
 
 function createExternalCode() {
     
-    if($('#codigo').val().startsWith('5000')) {
+    if($('#codigo').val().startsWith('500000')) {
         $('#codigoExterno').val($('#codigo').val().substring(6, 12));
     }
 }
@@ -83,7 +83,7 @@ $(document).ready(function () {
       var codigoValue = $('#codigo').val();
       var codigoExternoValue = $('#codigoExterno').val();
       
-      if (codigoValue.startsWith('5000') && codigoExternoValue >= 230620 && instructorValue && codigoValue && codigoExternoValue) {
+      if (codigoValue.startsWith('500000') && codigoExternoValue >= 230620 && instructorValue && codigoValue && codigoExternoValue) {
           $('#submitButton').prop('disabled', false);
       } else {
           $('#submitButton').prop('disabled', true);
@@ -92,7 +92,7 @@ $(document).ready(function () {
           validateCode("Debe seleccionar un instructor");
       } else if(!codigoValue || !codigoExternoValue) {
           validateCode("Debe escanear un código o introducirlo manualmente");
-      } else if(!codigoValue.startsWith('5000')) {
+      } else if(!codigoValue.startsWith('500000')) {
           validateCode("El codigo introducido no es correcto, vuelva a intentarlo");
       } else {
           validateCode("");
