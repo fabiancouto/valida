@@ -1,31 +1,151 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Aplicación de Gestión</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS (opcional) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-32x32.png" sizes="32x32" />
-<link rel="icon" href="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-192x192.png" sizes="192x192" />
-<link rel="apple-touch-icon" href="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-180x180.png" />
-<meta name="msapplication-TileImage" content="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-270x270.png" />
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión · Autoescuela Vivero</title>
+    <meta name="description" content="Panel de gestión de Autoescuela Vivero: profesores, alumnos, clases y validación de tickets.">
+    <meta name="theme-color" content="#f6f1ec" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#12100f" media="(prefers-color-scheme: dark)">
 
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-180x180.png">
+    <meta name="msapplication-TileImage" content="https://autoescuelavivero.com/wp-content/uploads/2022/09/cropped-favicon-270x270.png">
+
+    <link rel="stylesheet" href="css/home.css">
+</head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">GestVivero</h1>
-        <div class="mx-auto mt-1">
-            <a href="profesores.html" class="btn btn-primary shadow-lg p-5 mb-1 rounded">Profesores</a>
-            <a href="alumnos.html" class="btn btn-success m-1 shadow-lg p-5 mb-1 rounded">Alumnos</a>
-            <a href="clases.html" class="btn btn-warning m-1 shadow-lg p-5 mb-1 rounded">Clases</a>
-            <a href="tickets.html" class="btn btn-danger m-1 shadow-lg p-5 mb-1 rounded">Tickets</a>
-        </div>
+    <a class="skip-link" href="#menu">Ir al menú</a>
+
+    <div class="page">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Autoescuela Vivero, inicio">
+                <span class="brand__mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M3.6 9.8h6.2M14.2 9.8h6.2M12 15v5.6"></path>
+                    </svg>
+                </span>
+                <span class="brand__text">
+                    <strong>Autoescuela</strong>
+                    <span>Vivero</span>
+                </span>
+            </a>
+
+            <span class="pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <rect x="4" y="10" width="16" height="10" rx="2.5"></rect>
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                </svg>
+                Panel interno
+            </span>
+        </header>
+
+        <main class="home" id="menu">
+            <section class="hero" aria-labelledby="page-title">
+                <p class="eyebrow">Panel de gestión</p>
+                <h1 id="page-title">Todo el centro,<br><span>en un solo panel.</span></h1>
+                <p class="subtitle">Accede a profesores, alumnos, clases y validación de tickets desde un único lugar.</p>
+            </section>
+
+            <section class="menu-section" aria-labelledby="menu-title">
+                <div class="menu-head">
+                    <h2 id="menu-title">Accesos directos</h2>
+                    <span class="menu-head__line" aria-hidden="true"></span>
+                    <span class="menu-head__hint">4 secciones</span>
+                </div>
+
+                <nav class="menu" aria-labelledby="menu-title">
+                    <a class="tile tile--profesores" href="/profesores">
+                        <span class="tile__top">
+                            <span class="tile__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <circle cx="9" cy="8" r="3.5"></circle>
+                                    <path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path>
+                                    <path d="m16 13 2 2 4-4"></path>
+                                </svg>
+                            </span>
+                            <span class="tile__arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <path d="M7 17 17 7M8 7h9v9"></path>
+                                </svg>
+                            </span>
+                        </span>
+                        <span class="tile__body">
+                            <span class="tile__title">Profesores</span>
+                            <span class="tile__desc">Consulta y gestiona el equipo docente.</span>
+                        </span>
+                    </a>
+
+                    <a class="tile tile--alumnos" href="/alumnos">
+                        <span class="tile__top">
+                            <span class="tile__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <path d="M22 9 12 4 2 9l10 5 10-5Z"></path>
+                                    <path d="M6 11.5V16c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.5"></path>
+                                    <path d="M22 9v5"></path>
+                                </svg>
+                            </span>
+                            <span class="tile__arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <path d="M7 17 17 7M8 7h9v9"></path>
+                                </svg>
+                            </span>
+                        </span>
+                        <span class="tile__body">
+                            <span class="tile__title">Alumnos</span>
+                            <span class="tile__desc">Consulta y gestiona los datos de los alumnos.</span>
+                        </span>
+                    </a>
+
+                    <a class="tile tile--clases" href="/clases">
+                        <span class="tile__top">
+                            <span class="tile__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <rect x="3" y="5" width="18" height="16" rx="2.5"></rect>
+                                    <path d="M8 3v4M16 3v4M3 10h18"></path>
+                                    <path d="M8 14h3M8 17h6"></path>
+                                </svg>
+                            </span>
+                            <span class="tile__arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <path d="M7 17 17 7M8 7h9v9"></path>
+                                </svg>
+                            </span>
+                        </span>
+                        <span class="tile__body">
+                            <span class="tile__title">Clases</span>
+                            <span class="tile__desc">Organiza y revisa la planificación de clases.</span>
+                        </span>
+                    </a>
+
+                    <a class="tile tile--tickets" href="/tickets">
+                        <span class="tile__top">
+                            <span class="tile__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h13A2.5 2.5 0 0 1 21 8.5v1.7a2 2 0 0 0 0 3.6v1.7a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 15.5v-1.7a2 2 0 0 0 0-3.6V8.5Z"></path>
+                                    <path d="M14 6v12" stroke-dasharray="2 3.2"></path>
+                                </svg>
+                            </span>
+                            <span class="tile__arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                    <path d="M7 17 17 7M8 7h9v9"></path>
+                                </svg>
+                            </span>
+                        </span>
+                        <span class="tile__body">
+                            <span class="tile__title">Tickets</span>
+                            <span class="tile__desc">Valida los tickets de práctica y regístralos.</span>
+                        </span>
+                    </a>
+                </nav>
+            </section>
+        </main>
+
+        <footer class="page-footer">Autoescuela Vivero · Panel de gestión</footer>
     </div>
-    <!-- Bootstrap JS (opcional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
