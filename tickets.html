@@ -1,140 +1,196 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autoescuela Vivero</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  
-    
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Validar ticket · Autoescuela Vivero</title>
+    <meta name="description" content="Valida el ticket de tu práctica en la Autoescuela Vivero escaneando el código de barras o introduciéndolo manualmente.">
+    <meta name="theme-color" content="#f23d08" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#12100f" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/tickets.css">
+    <script src="js/tickets.js" defer></script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Saltar al formulario</a>
+	
+	<div class="page">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Autoescuela Vivero, volver al inicio">
+                <span class="brand__mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M3.6 9.8h6.2M14.2 9.8h6.2M12 15v5.6"></path>
+                    </svg>
+                </span>
+                <span class="brand__text">
+                    <strong>Autoescuela</strong>
+                    <span>Vivero</span>
+                </span>
+            </a>
+            <span class="status-pill">
+                <span class="status-pill__dot" aria-hidden="true"></span>
+                Área de prácticas
+            </span>
+        </header>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 form-container">
-            <h2 class="mb-4">Validar Ticket</h2>
-            <p id="error-message" class="error-message"></p>
-            <form id="myForm">
-                <div class="form-group">
-                    <label for="instructor">Instructor:</label>
-                    <select class="form-control" id="instructor" name="entry.945813456" required>
-                        <option value="">Seleccionar</option>
-                        <option value="ALBERTO MILLAN LLULL">ALBERTO MILLAN LLULL</option>
-                        <option value="ASCENSION NAVARRO VARA">ASCENSION NAVARRO VARA</option>
-                        <option value="BEGONA DEL CAMPO ZAFRA">BEGOÑA DEL CAMPO ZAFRA</option>
-                        <option value="DAVID BORNAS MOLINA">DAVID BORNAS MOLINA</option>
-                        <option value="DOLORES MOLINA LOPEZ">DOLORES MOLINA LOPEZ</option>
-                        <option value="FRANCISCA MARIA BALLESTER BALAGUER">FRANCISCA MARIA BALLESTER BALAGUER</option>
-                        <option value="FRANCISCO FERNANDEZ FEIJOO">FRANCISCO FERNANDEZ FEIJOO</option>
-                        <option value="ISABEL MOLINA VELA">ISABEL MOLINA VELA</option>
-                        <option value="JORDI FIOL VALLEJO">JORDI FIOL VALLEJO</option>
-                        <option value="JOSE LOPEZ GARCIA">JOSE LOPEZ GARCIA</option>
-                        <option value="JOSE MARIA HERVAS ALMUDEVAR">JOSE MARIA HERVAS ALMUDEVAR</option>
-                        <option value="JUAN ANTONIO VICENS PASTOR">JUAN ANTONIO VICENS PASTOR</option>
-                        <option value="JUAN JOSE INES DE DIEGO">JUAN JOSE INES DE DIEGO</option>
-                        <option value="MANUEL MERINO FARBI">MANUEL MERINO FARBI</option>
-                        <option value="MARIA JOSE LOBEIRAS DIAZ">MARIA JOSE LOBEIRAS DIAZ</option>
-                        <option value="MARIA NIEVES CAMPINS MATEU">MARIA NIEVES CAMPINS MATEU</option>
-                        <option value="MARIO PUENTE MENDEZ">MARIO PUENTE MENDEZ</option>
-                        <option value="MARGARITA RODRIGUEZ PONS">MARGARITA RODRIGUEZ PONS</option>
-                        <option value="MIGUEL CANO GIMENEZ">MIGUEL CANO GIMENEZ</option>
-                        <option value="PILAR MARIA SALAS MAS">PILAR MARIA SALAS MAS</option>
-                        <option value="RAFA REUS LINARES">RAFA REUS LINARES</option>
-                        <option value="RAFAEL CARBONELL SAMPOL">RAFAEL CARBONELL SAMPOL</option>
-                        <option value="RAFAEL MAS CASAS">RAFAEL MAS CASAS</option>
-                        <option value="VICTOR REUS LINARES">VICTOR REUS LINARES</option>
-                        
-                    </select>
+        <main class="card-wrap" id="main">
+            <section class="card" aria-labelledby="pageTitle">
+                <div class="card__intro">
+                    <p class="eyebrow">Tickets de práctica</p>
+                    <h1 id="pageTitle">Validar ticket</h1>
+                    <p class="subtitle">Escanea el código del ticket o introdúcelo manualmente para registrar la práctica.</p>
                 </div>
-                <div class="form-group">
-                    <label for="vehiculo">Tipo de Vehículo:</label>
-                    <select class="form-control" id="vehiculo" name="entry.200804049" required>
-                        <option value="COCHE">COCHE</option>
-                        <option value="MOTO">MOTO</option>
-                        <option value="BUS">BUS</option>
-                        <option value="CAMION">CAMIÓN</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="codigo">Código:</label>
-                    <input type="text" class="form-control" id="codigo" onblur="createExternalCode()" name="entry.1171362171" required readonly>
-                    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#scannerModal">
-                        Escanear
+				<form id="myForm" action="https://script.google.com/macros/s/AKfycbzYP0LtUU8_-X224x4XUa6XFMI_J_zZm29zmGXM1jf4W6Cn2DZamTnEPpWSP1RbSuEhvw/exec" method="get" target="_self">
+                    <div id="error-message" class="alert" role="alert" aria-live="polite" hidden>
+                        <svg class="alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 7.5v5.5M12 16.5h.01"></path>
+                        </svg>
+                        <span id="error-message-text"></span>
+                    </div>
+<div class="form-grid">
+                        <div class="field">
+                            <label for="instructor">Instructor</label>
+                            <div class="select-shell">
+                                <select class="control" id="instructor" name="entry.945813456" required>
+                                    <option value="">Seleccionar</option>
+                                    <!-- <option value="ALBERTO MILLAN LLULL">ALBERTO MILLAN LLULL</option> -->
+                                    <option value="ASCENSION NAVARRO VARA">ASCENSION NAVARRO VARA</option>
+                                    <!-- <option value="BEGONA DEL CAMPO ZAFRA">BEGOÑA DEL CAMPO ZAFRA</option> -->
+                                    <option value="DAVID BORNAS MOLINA">DAVID BORNAS MOLINA</option>
+                                    <option value="DOLORES MOLINA LOPEZ">DOLORES MOLINA LOPEZ</option>
+                                    <option value="FRANCISCA MARIA BALLESTER BALAGUER">FRANCISCA MARIA BALLESTER BALAGUER</option>
+                                    <option value="FRANCISCO FERNANDEZ FEIJOO">FRANCISCO FERNANDEZ FEIJOO</option>
+                                    <option value="ISABEL MOLINA VELA">ISABEL MOLINA VELA</option>
+                                    <!-- <option value="JORDI FIOL VALLEJO">JORDI FIOL VALLEJO</option> -->
+                                    <option value="JOSE LOPEZ GARCIA">JOSE LOPEZ GARCIA</option>
+                                    <option value="JOSE MARIA HERVAS ALMUDEVAR">JOSE MARIA HERVAS ALMUDEVAR</option>
+                                    <option value="JUAN ANTONIO VICENS PASTOR">JUAN ANTONIO VICENS PASTOR</option>
+                                    <option value="JUAN JOSE INES DE DIEGO">JUAN JOSE INES DE DIEGO</option>
+                                    <!-- <option value="MANUEL MERINO FARBI">MANUEL MERINO FARBI</option> -->
+                                    <option value="MARIA JOSE LOBEIRAS DIAZ">MARIA JOSE LOBEIRAS DIAZ</option>
+                                    <option value="MARIA NIEVES CAMPINS MATEU">MARIA NIEVES CAMPINS MATEU</option>
+                                    <option value="MARIO PUENTE MENDEZ">MARIO PUENTE MENDEZ</option>
+                                    <option value="MARGARITA RODRIGUEZ PONS">MARGARITA RODRIGUEZ PONS</option>
+                                    <option value="MIGUEL CANO GIMENEZ">MIGUEL CANO GIMENEZ</option>
+                                    <option value="PILAR MARIA SALAS MAS">PILAR MARIA SALAS MAS</option>
+                                    <option value="RAFA REUS LINARES">RAFA REUS LINARES</option>
+                                    <option value="RAFAEL CARBONELL SAMPOL">RAFAEL CARBONELL SAMPOL</option>
+                                    <option value="RAFAEL MAS CASAS">RAFAEL MAS CASAS</option>
+                                    <option value="VICTOR REUS LINARES">VICTOR REUS LINARES</option>
+                                </select>
+                                <svg class="select-shell__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="vehiculo">Tipo de vehículo</label>
+                            <div class="select-shell">
+                                <select class="control" id="vehiculo" name="entry.200804049" required>
+                                    <option value="COCHE">COCHE</option>
+                                    <option value="MOTO">MOTO</option>
+                                    <option value="BUS">BUS</option>
+                                    <option value="CAMION">CAMIÓN</option>
+                                </select>
+                                <svg class="select-shell__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+					<div class="field">
+                        <div class="field__head">
+                            <label for="codigo">Código del ticket</label>
+                            <span class="hint" id="codeHint">12 dígitos · empieza por 500000</span>
+                        </div>
+                        <div class="code-group">
+                            <div class="input-shell">
+                                <svg class="input-shell__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M4 5v14M7 5v14M10 5v9M13 5v14M16.5 5v9M20 5v14"></path>
+                                </svg>
+                                <input class="control input-shell__input" type="text" id="codigo" name="entry.1171362171" placeholder="Escanea o escribe" autocomplete="off" inputmode="numeric" spellcheck="false" aria-describedby="codeHint" required readonly>
+                            </div>
+                            <button type="button" class="btn btn--scan" id="scanButton">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Escanear
+                            </button>
+                        </div>
+                        <div class="manual-row">
+                            <button type="button" class="link-btn" id="manualButton">Escribir el código manualmente</button>
+                        </div>
+                    </div>
+					<div class="field">
+                        <div class="field__head">
+                            <label for="codigoExterno">Código externo</label>
+                            <span class="hint">Se calcula automáticamente</span>
+                        </div>
+                        <div class="input-shell">
+                            <input class="control input-shell__input input-shell__input--readonly" type="text" id="codigoExterno" name="entry.851607241" placeholder="—" autocomplete="off" spellcheck="false" required readonly>
+                            <svg class="input-shell__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+                                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                            </svg>
+                        </div>
+                    </div>
+					<button type="submit" class="submit" id="submitButton" disabled>
+                        <span class="spinner" aria-hidden="true"></span>
+                        <span id="submitLabel">Enviar ticket</span>
+                        <svg class="submit__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6"></path>
+                        </svg>
                     </button>
-                    <button type="button" class="btn btn-primary mt-2" onclick="enableEditing()">
-                        Manual
-                    </button>
-                </div>
-                <div class="form-group">
-                    <label for="codigoExterno">Código Externo:</label>
-                    <input type="text" class="form-control" id="codigoExterno" name="entry.851607241" required readonly>
-                </div>
-                <button type="submit" class="btn btn-primary" id="submitButton" disabled>Enviar</button>
-                <a class='btn btn-danger' href='/'>Volver</a>
-            </form>
+					 <a class="back-link" href="/">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 12H5M11 18l-6-6 6-6"></path>
+                        </svg>
+                        Volver al inicio
+                    </a>
+                </form>
+            </section>
+			<p class="page-footer">Autoescuela Vivero · Uso interno</p>
+        </main>
+    </div>
+ <dialog id="scannerModal" class="scanner" aria-labelledby="scannerTitle">
+        <div class="scanner__head">
+            <div>
+                <p class="eyebrow">Lector de códigos</p>
+                <h2 id="scannerTitle">Escanear ticket</h2>
+            </div>
+            <button type="button" class="icon-btn" id="closeScanner" aria-label="Cerrar el escáner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="scanner__body">
+            <div class="scanner__stage" id="scannerStage">
+                <div id="scannerViewport" class="scanner__viewport"></div>
+                <div class="scan-frame" aria-hidden="true"></div>
+            </div>
+            <p class="scanner__status" id="scannerStatus" role="status" aria-live="polite">
+                <span class="mini-spinner" aria-hidden="true"></span>
+                <span id="scannerStatusText">Apunta al código de barras del ticket</span>
+            </p>
+            <p class="scanner__error" id="scannerError" role="alert" hidden></p>
+            <div class="scanner__actions">
+                <button type="button" class="btn btn--ghost" id="scannerManual">Introducir el código manualmente</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div id="loadingOverlay" class="loading-overlay" hidden>
+        <div class="loading-card" role="status" aria-live="polite">
+            <span class="spinner spinner--large" aria-hidden="true"></span>
+            <p>Enviando ticket…</p>
+            <small>Espera un momento, no cierres esta ventana.</small>
         </div>
     </div>
-</div>
-
-
-<!-- Scanner Modal -->
-<div class="modal fade" id="scannerModal" tabindex="-1" role="dialog" aria-labelledby="scannerModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="scannerModalLabel">Lector de códigos de barras</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="interactive" class="viewport"></div>
-                <div class="error"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Pantalla de Carga -->
-<div id="loadingOverlay">
-    <!-- El spinner se añadirá dinámicamente -->
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
-<script src="js/tickets.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Cargar valores de localStorage al cargar la página
-        const instructorSelect = document.getElementById('instructor');
-        const vehiculoSelect = document.getElementById('vehiculo');
-
-        const savedInstructor = localStorage.getItem('selectedInstructor');
-        const savedVehiculo = localStorage.getItem('selectedVehiculo');
-
-        if (savedInstructor) {
-            instructorSelect.value = savedInstructor;
-        }
-        if (savedVehiculo) {
-            vehiculoSelect.value = savedVehiculo;
-        }
-
-        // Guardar el instructor seleccionado en localStorage
-        instructorSelect.addEventListener('change', function () {
-            localStorage.setItem('selectedInstructor', instructorSelect.value);
-        });
-
-        // Guardar el tipo de vehículo seleccionado en localStorage
-        vehiculoSelect.addEventListener('change', function () {
-            localStorage.setItem('selectedVehiculo', vehiculoSelect.value);
-        });
-    });
-</script>
 </body>
 </html>
