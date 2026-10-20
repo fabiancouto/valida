@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Vehículos e ITV · Autoescuela Vivero</title>
+    <meta name="description" content="Consulta la flota de Autoescuela Vivero: vehículos, matrículas, combustible, seguro y próximos vencimientos de ITV.">
+    <meta name="theme-color" content="#f6f1ec" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#12100f" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/vehiculos.css">
+    <script src="js/vehiculos.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#listado">Ir al listado de vehículos</a>
+
+    <div class="page">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Autoescuela Vivero, volver al inicio">
+                <span class="brand__mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M3.6 9.8h6.2M14.2 9.8h6.2M12 15v5.6"></path>
+                    </svg>
+                </span>
+                <span class="brand__text">
+                    <strong>Autoescuela</strong>
+                    <span>Vivero</span>
+                </span>
+            </a>
+
+            <span class="status-pill">
+                <span class="status-pill__dot" aria-hidden="true"></span>
+                Control de flota
+            </span>
+        </header>
+
+        <main class="fleet">
+            <section class="intro" aria-labelledby="pageTitle">
+                <div class="intro__text">
+                    <p class="eyebrow">Vehículos e ITV</p>
+                    <h1 id="pageTitle">La flota del centro,<br><span>siempre al día.</span></h1>
+                    <p class="subtitle">Consulta los vehículos, sus seguros y las fechas de ITV publicadas en la hoja del centro. La información se carga al abrir la página.</p>
+                </div>
+
+                <a class="back-link" href="/">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M19 12H5M11 18l-6-6 6-6"></path>
+                    </svg>
+                    Volver al panel
+                </a>
+            </section>
+
+            <section class="stats" aria-label="Resumen de la flota">
+                <article class="stat">
+                    <span class="stat__value" id="statTotal">—</span>
+                    <span class="stat__label">Vehículos</span>
+                    <span class="stat__hint" id="statTotalHint">Sin datos</span>
+                </article>
+
+                <article class="stat stat--ok">
+                    <span class="stat__value" id="statService">—</span>
+                    <span class="stat__label">En servicio</span>
+                    <span class="stat__hint" id="statServiceHint">Sin datos</span>
+                </article>
+
+                <article class="stat stat--danger">
+                    <span class="stat__value" id="statExpired">—</span>
+                    <span class="stat__label">ITV caducada</span>
+                    <span class="stat__hint" id="statExpiredHint">Sin datos</span>
+                </article>
+
+                <article class="stat stat--warn">
+                    <span class="stat__value" id="statSoon">—</span>
+                    <span class="stat__label">ITV en 30 días</span>
+                    <span class="stat__hint" id="statSoonHint">Sin datos</span>
+                </article>
+            </section>
+
+            <section class="fleet-panel" id="listado" aria-labelledby="listTitle" aria-busy="false">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Datos de la hoja</p>
+                        <h2 id="listTitle">Flota y vencimientos</h2>
+                    </div>
+
+                    <div class="panel-tools">
+                        <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRnLeY61SiuWTw_sDGC1Cw9EAlDR_7XhJK3FeW2IgzKY75WQbdz2miBvlxFaHOuxCEM04FN3ZZ8jezt/pubhtml/sheet?gid=0&amp;headers=false&amp;range=A2:H250" target="_blank" rel="noopener">
+                            Ver hoja original
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"></path>
+                            </svg>
+                        </a>
+
+                        <button type="button" class="refresh" id="refreshButton">
+                            <svg class="refresh__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 11a8 8 0 1 0-2.3 6.3M20 5v6h-6"></path>
+                            </svg>
+                            <span id="refreshLabel">Actualizar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="toolbar">
+                    <div class="field">
+                        <label for="search">Buscar</label>
+                        <div class="search-shell">
+                            <svg class="search-shell__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m16.5 16.5 4 4"></path>
+                            </svg>
+                            <input class="control search-shell__input" type="search" id="search" placeholder="Matrícula o vehículo" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+
+                    <div class="field field--filter">
+                        <label for="statusFilter">Mostrar</label>
+                        <div class="select-shell">
+                            <select class="control" id="statusFilter">
+                                <option value="all">Todos los vehículos</option>
+                                <option value="service">En servicio</option>
+                                <option value="expired">ITV caducada</option>
+                                <option value="soon">ITV en 30 días</option>
+                                <option value="off">Baja temporal</option>
+                            </select>
+                            <svg class="select-shell__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M6 9l6 6 6-6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice" id="notice" role="alert" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M12 7.5v5.5M12 16.5h.01"></path>
+                    </svg>
+                    <span id="noticeText"></span>
+                </div>
+
+                <div class="results-bar">
+                    <p class="result-count" id="resultCount" aria-live="polite" aria-atomic="true">Datos de la flota</p>
+                    <p class="updated" id="updatedAt" hidden></p>
+                </div>
+
+                <div class="state-card" id="loadingState" role="status" hidden>
+                    <span class="spinner" aria-hidden="true"></span>
+                    <p>Cargando los datos de la flota…</p>
+                    <small>Consultando la hoja publicada en Google Sheets.</small>
+                </div>
+
+                <div class="state-card state-card--error" id="errorState" role="alert" hidden>
+                    <span class="state-card__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 7.5v5.5M12 16.5h.01"></path>
+                        </svg>
+                    </span>
+                    <p id="errorText">No se han podido cargar los datos de la flota.</p>
+                    <small>Comprueba la conexión e inténtalo de nuevo. También puedes abrir la hoja original.</small>
+                    <div class="state-card__actions">
+                        <button type="button" class="btn btn--primary" id="retryButton">Reintentar</button>
+                        <a class="btn btn--ghost" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRnLeY61SiuWTw_sDGC1Cw9EAlDR_7XhJK3FeW2IgzKY75WQbdz2miBvlxFaHOuxCEM04FN3ZZ8jezt/pubhtml/sheet?gid=0&amp;headers=false&amp;range=A2:H250" target="_blank" rel="noopener">Abrir la hoja</a>
+                    </div>
+                </div>
+
+                <div class="state-card" id="emptyState" hidden>
+                    <span class="state-card__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="m16.5 16.5 4 4"></path>
+                        </svg>
+                    </span>
+                    <p>No hay vehículos que coincidan con la búsqueda.</p>
+                    <small>Prueba con otra matrícula, otro modelo o cambia el filtro.</small>
+                    <div class="state-card__actions">
+                        <button type="button" class="btn btn--ghost" id="clearFilters">Quitar filtros</button>
+                    </div>
+                </div>
+
+                <noscript>
+                    <div class="notice notice--static">
+                        <span>Activa JavaScript para consultar la flota desde la hoja de cálculo. Mientras tanto, puedes <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRnLeY61SiuWTw_sDGC1Cw9EAlDR_7XhJK3FeW2IgzKY75WQbdz2miBvlxFaHOuxCEM04FN3ZZ8jezt/pubhtml/sheet?gid=0&amp;headers=false&amp;range=A2:H250" target="_blank" rel="noopener">abrir la hoja original</a>.</span>
+                    </div>
+                </noscript>
+
+                <ul class="vehicle-list" id="vehicleList" aria-labelledby="listTitle" hidden></ul>
+            </section>
+        </main>
+
+        <footer class="page-footer">
+            Autoescuela Vivero · Datos publicados en Google Sheets
+        </footer>
+    </div>
+</body>
+</html>
